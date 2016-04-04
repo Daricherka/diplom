@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        var requestDSList = function() {
+            console.log('----------------------------------------------------');
+            console.log('GET DS List')
+
+            var request = {};
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/demand_sources/',
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    var demandSources = [];
+                    var tiers1 = [];
+                    var tiers2 = [];
+
+                    for (i in response.list) {
+                        demandSources.push(response.list[i].id);
+                    }
+
+                    for (i = 0; i < Math.round(Math.random() * 4); i++) {
+                        tiers1.push({
+                            name: 'Test auto',
+                            order: i + 1,
+                            timeout: Math.round(Math.random() * 1000) + 200,
+                            demandSources: []
+                        });
+
+                        for (j = 0; j < Math.round(Math.random() * 7); j++) {
+                            dsIndex = Math.round(Math.random() * (demandSources.length - 1));
+                            tiers1[tiers1.length - 1].demandSources.push(demandSources[dsIndex])
+                        }
+                    }
+
+                    for (i = 0; i < Math.round(Math.random() * 4); i++) {
+                        tiers2.push({
+                            name: 'Test auto',
+                            order: i + 1,
+                            timeout: Math.round(Math.random() * 1000) + 200,
+                            demandSources: []
+                        });
+
+                        for (j = 0; j < Math.round(Math.random() * 7); j++) {
+                            dsIndex = Math.round(Math.random() * (demandSources.length - 1));
+                            tiers2[tiers2.length - 1].demandSources.push(demandSources[dsIndex])
+                        }
+                    }
+
+                    request1(tiers1, tiers2);
+                }
+            });
+        }
+
+        var request1 = function(tiers1, tiers2) {
+            console.log('----------------------------------------------------');
+            console.log('POST 1');
+
+            var request = {
+                name: 'Test auto',
+                description: 'Test auto description',
+                archived: 0,
+                tiers: tiers1
+            }
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/scenarios/',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request2(response.id, tiers1, tiers2)
+                }
+            });
+        }
+
+        var request2 = function(id, tiers1, tiers2) {
+            console.log('----------------------------------------------------');
+            console.log('PUT 1');
+
+            var request = {
+                name: 'Test auto 2',
+                description: 'Test auto description 2',
+                archived: 0,
+                tiers: tiers1
+            }
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/scenarios/' + id + '/',
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request3(response.id, tiers1, tiers2)
+                }
+            });
+        }
+
+        var request3 = function(id, tiers1, tiers2) {
+            console.log('----------------------------------------------------');
+            console.log('PUT 2');
+
+            var request = {
+                name: 'Test auto 3',
+                description: 'Test auto description 3',
+                archived: 0,
+                tiers: tiers2
+            }
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/scenarios/' + id + '/',
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request4(response.id)
+                }
+            });
+        }
+
+        var request4 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PATCH 1')
+
+            var request = {
+                archived: 1, 
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/scenarios/' + id + '/',
+                type: 'PATCH',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
+        requestDSList();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        var testDomains1 = [
+            'test_auto_' + Math.random() + '.com',
+            'test_auto_' + Math.random() + '.com'
+        ];
+
+        var testDomains2 = [
+            'test_auto_' + Math.random() + '.com',
+            'test_auto_' + Math.random() + '.com'
+        ];
+
+        var request1 = function() {
+            console.log('----------------------------------------------------');
+            console.log('POST 1');
+
+            var request = {
+                archived: 0, 
+                description: 'Pack Auto Test Description', 
+                domains: testDomains1,
+                name: 'Pack Auto Test'
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request2(response.id);
+                }
+            });
+        }
+
+        var request2 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('GET 1')
+
+            var request = {};
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/',
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request3(id);
+                }
+            });
+        }
+
+        var request3 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PUT 1')
+
+            var request = {
+                archived: 0, 
+                description: 'Pack Auto Test Description', 
+                domains: testDomains2,
+                name: 'Pack Auto Test'
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/' + id + '/',
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request4(response.id);
+                }
+            });
+        }
+
+        var request4 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PUT 2')
+
+            var request = {
+                archived: 0, 
+                description: 'Pack Auto Test Description', 
+                domains: testDomains2,
+                name: 'Pack Auto Test'
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/' + id + '/',
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request5(response.id);
+                }
+            });
+        }
+
+        var request5 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PATCH 1')
+
+            var request = {
+                archived: 1, 
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/' + id + '/',
+                type: 'PATCH',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request6(response.id);
+                }
+            });
+        }
+
+        var request6 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('GET 2')
+
+            var request = {};
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/' + id + '/',
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request7(response.data.id);
+                }
+            });
+        }
+
+        var request7 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('DELETE 1')
+
+            var request = {};
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/' + id + '/',
+                type: 'DELETE',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request8()
+                }
+            });
+        }
+
+        var request8 = function() {
+            console.log('----------------------------------------------------');
+            console.log('POST 2');
+
+            var request = {
+                archived: 0, 
+                description: 'Pack Auto Test Description', 
+                domains: [],
+                name: 'Pack Auto Test'
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request9(response.id);
+                }
+            });
+        }
+
+        var request9 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PUT 3')
+
+            var request = {
+                archived: 0, 
+                description: 'Pack Auto Test Description', 
+                domains: [],
+                name: 'Pack Auto Test'
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/' + id + '/',
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request10(response.id);
+                }
+            });
+        }
+
+        var request10 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('GET 3')
+
+            var request = {};
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/' + id + '/',
+                type: 'GET',
+                dataType: 'json',
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request11(response.data.id);
+                }
+            });
+        }
+
+        var request11 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('DELETE 2')
+
+            var request = {};
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/domain_lists/' + id + '/',
+                type: 'DELETE',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
+        request1();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

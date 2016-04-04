@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript">
+        var filters = [];
+
+        filters['list_geo'] = [];
+        for (var i = 1; i <= 234; i++) { filters['list_geo'].push(i); }
+
+        filters['domain_pack'] = [];
+        for (var i = 1; i <= 22; i++) { filters['domain_pack'].push(i); }
+
+        filters['list_publisher'] = [1, 2];
+
+        filters['list_platform'] = [1, 2, 3, 4];
+
+        filters['list_browser'] = [];
+        for (var i = 1; i <= 37; i++) { filters['list_browser'].push(i); }
+
+        filters['list_oss'] = [];
+        for (var i = 1; i <= 9; i++) { filters['list_oss'].push(i); }
+
+        filters['list_device'] = [];
+        for (var i = 1; i <= 21; i++) { filters['list_device'].push(i); }
+
+        filters['list_domain'] = [
+            '159.122.112.11',
+            'adms.loc',
+            'test04.smkhost.com.ua',
+            'test3.com',
+            'test_auto_6.com',
+            'test_auto_7.com',
+            'test_auto_8.com',
+            'test_auto_9.com',
+            'test_new_1.com',
+            'test_new_2.com',
+            'test_new_3.com',
+            'test_new_5.com',
+            'test_new_6.com',
+            'test_new_7.com'
+        ];
+
+        var getRandomFilter = function(filter, count) {
+            var length = filter.length;
+            var result = [];
+
+            for (var i = 0; i < count; i++) {
+                var random = Math.round((Math.random() * length) - 0.5);
+                var randomId = filter[random];
+                if (result.indexOf(randomId) != -1) { count++; }
+                else { result.push(randomId); }
+            }
+
+            return result;
+        }
+
+        var requestData1 = {
+            "archived": 0, 
+            "description": "Test demand source 1",
+            "type": "",
+            "enabled": 1, 
+            "floorCPM": 3.0, 
+            "frequencyCap": 0, 
+            "frequencyCapMode": 0, 
+            "inFlightEnd": null, 
+            "inFlightStart": "2016-04-12T11:12:13", 
+            "inFlightTimeZone": 0, 
+            "name": "Video3", 
+            "requestsCap": 0, 
+            "requestsCapMode": -1, 
+            "reqTimeout": 0, 
+            "url": "http://test.com/test1.xml", 
+            "viewsCap": 0, 
+            "viewsCapMode": -1,
+            "targeting": {
+                "name": "",
+                "filters": [
+                    {
+                        "list": getRandomFilter(filters['list_geo'], Math.round(Math.random() * 8)), 
+                        "mode": 1, 
+                        "type": "geo"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['domain_pack'], Math.round(Math.random() * 6)), 
+                        "mode": 0, 
+                        "type": "domain"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_publisher'], 1),
+                        "mode": -1, 
+                        "type": "publisher"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_platform'], 1), 
+                        "mode": 1, 
+                        "type": "platform"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_browser'], Math.round(Math.random() * 7)),
+                        "mode": 0, 
+                        "type": "browser"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_oss'], Math.round(Math.random() * 3)), 
+                        "mode": -1, 
+                        "type": "os"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_device'], Math.round(Math.random() * 5)), 
+                        "mode": 1, 
+                        "type": "device"
+                    },
+                    {
+                        "list": getRandomFilter(filters['list_domain'], Math.round(Math.random() * 3)), 
+                        "mode": 0, 
+                        "type": "domainString"
+                    }
+                ], 
+                "inFlightTimeMatrix": {
+                    "zone": 0, 
+                    "list": [
+                        {
+                            "dayId": 3, 
+                            "startTimeId": 1, 
+                            "endTimeId": 2
+                        }, 
+                        {
+                            "dayId": 2, 
+                            "startTimeId": 4, 
+                            "endTimeId": 8
+                        },
+                    ], 
+                    "mode": 0
+                }
+            }
+        }
+
+        var requestData2 = {
+            "archived": 1, 
+            "description": "Test demand source 2",
+            "type": "",
+            "enabled": 0, 
+            "floorCPM": 3.0, 
+            "frequencyCap": 1, 
+            "frequencyCapMode": 1, 
+            "inFlightEnd": "2016-04-02T11:12:13", 
+            "inFlightStart": "2016-04-12T11:12:13", 
+            "inFlightTimeZone": 0, 
+            "name": "Video3", 
+            "requestsCap": 1, 
+            "requestsCapMode": -1, 
+            "reqTimeout": 10000, 
+            "url": "http://test.com/test2.xml", 
+            "viewsCap": 0, 
+            "viewsCapMode": -1,
+            "targeting": {
+                "name": "",
+                "filters": [
+                    {
+                        "list": getRandomFilter(filters['list_geo'], Math.round(Math.random() * 8)), 
+                        "mode": 1, 
+                        "type": "geo"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['domain_pack'], Math.round(Math.random() * 6)), 
+                        "mode": 0, 
+                        "type": "domain"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_publisher'], 1),
+                        "mode": -1, 
+                        "type": "publisher"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_platform'], 1), 
+                        "mode": 1, 
+                        "type": "platform"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_browser'], Math.round(Math.random() * 7)),
+                        "mode": 0, 
+                        "type": "browser"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_oss'], Math.round(Math.random() * 3)), 
+                        "mode": -1, 
+                        "type": "os"
+                    }, 
+                    {
+                        "list": getRandomFilter(filters['list_device'], Math.round(Math.random() * 5)), 
+                        "mode": 1, 
+                        "type": "device"
+                    },
+                    {
+                        "list": getRandomFilter(filters['list_domain'], Math.round(Math.random() * 3)), 
+                        "mode": 0, 
+                        "type": "domainString"
+                    }
+                ], 
+                "inFlightTimeMatrix": {
+                    "zone": 0, 
+                    "list": [
+                        {
+                            "dayId": 3, 
+                            "startTimeId": 1, 
+                            "endTimeId": 2
+                        }, 
+                        {
+                            "dayId": 2, 
+                            "startTimeId": 4, 
+                            "endTimeId": 8
+                        },
+                    ], 
+                    "mode": 0
+                }
+            }
+        }
+
+        var request1 = function() {
+            console.log('----------------------------------------------------');
+            console.log('POST 1');
+
+            var request = requestData1;
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/demand_sources/',
+                type: 'POST',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request2(response.id);
+                }
+            });
+        }
+
+        var request2 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PUT 1')
+
+            var request = requestData1;
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/demand_sources/' + id + '/',
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request3(response.id);
+                }
+            });
+        }
+
+        var request3 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PUT 2')
+
+            var request = requestData2;
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/demand_sources/' + id + '/',
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request4(response.id);
+                }
+            });
+        }
+
+        var request4 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PUT 3')
+
+            var request = requestData1;
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/demand_sources/' + id + '/',
+                type: 'PUT',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request5(response.id);
+                }
+            });
+        }
+
+        var request5 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PATCH 1')
+
+            var request = {
+                archived: 1, 
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/demand_sources/' + id + '/',
+                type: 'PATCH',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                    request6(response.id);
+                }
+            });
+        }
+
+        var request6 = function(id) {
+            console.log('----------------------------------------------------');
+            console.log('PATCH 2')
+
+            var request = {
+                enabled: 1, 
+            };
+
+            console.log(request);
+            
+            $.ajax({
+                url: '/management/api/demand_sources/' + id + '/',
+                type: 'PATCH',
+                contentType: 'application/json',
+                dataType: 'json',
+                data: JSON.stringify(request),
+                beforeSend: function(xhr){xhr.setRequestHeader('Authorization', '01eb19b753d174c94a6383d5d42c697fc08e3502');},
+                success: function(response) {
+                    console.log(response);
+                }
+            });
+        }
+
+        request1();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>
