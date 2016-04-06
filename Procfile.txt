@@ -1,2 +1,2 @@
 
-web: gunicorn diplom.wsgi --log-file -
+web: gunicorn diplom.wsgi 
